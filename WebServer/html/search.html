@@ -1,0 +1,31 @@
+<html>
+Search: <input type="text" name="searchBox" id='searchBox'>
+<button onclick="query()">Search</button>
+<br>
+<div id='results'/>
+<script type="text/javascript">
+
+function makeHttpObject() {
+  try {return new XMLHttpRequest();}
+  catch (error) {}
+  try {return new ActiveXObject("Msxml2.XMLHTTP");}
+  catch (error) {}
+  try {return new ActiveXObject("Microsoft.XMLHTTP");}
+  catch (error) {}
+
+  throw new Error("Could not create HTTP request object.");
+}
+
+function query()
+{
+	httpObj = makeHttpObject();
+	
+	var request = makeHttpObject();
+	url = "/query/"+document.getElementById("searchBox").value;
+request.open("GET",  url , false);
+request.send(null);
+//alert(request.responseText);
+document.getElementById("results").innerHTML = request.responseText;
+}
+</script>
+</html>
