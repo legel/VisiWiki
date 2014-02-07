@@ -60,6 +60,17 @@ def login():
 			return "Login success."
     return "Login failed."
 
+@app.route("/registration", methods = ['POST','GET'])
+def registration():
+    if request.method == 'POST':
+	    if request.form.has_key('username') and request.form.has_key('pwd1') and request.form.has_key('pwd2'):
+		result=Connector.registrer(request.form['username'],request.form['pwd1'])
+		if result == -2
+		    return "User already exists."
+		if result == -1
+		    return "Password not equal."
+	        return "Register success."
+
 if __name__ == "__main__":
     app.debug = True
     #url_for('static', filename = 'hello.html')
