@@ -9,6 +9,7 @@ from flask import Flask
 from HTMLGetter import *
 from web.DoQuery import *
 import json
+from web.MySQLConnector import *
 
 ASSETS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), './html')
 
@@ -43,6 +44,7 @@ def send_foo(filename):
     return app.send_static_file('html/'+filename)
 
 queryObj = DoQuery()
+Connector = MySQLConnector()
 
 @app.route('/query/<topic>')
 def query(topic):
@@ -53,8 +55,9 @@ def query(topic):
 @app.route("/login", methods = ['POST','GET'])
 def login():
     if request.method == 'POST':
-        if request.form.has_key('username') and request.form['username'] =='tom':
-            return "welcome, %s " % (request.form['username'])
+        if request.form.has_key('username') and request.form.has_key('pwd'):
+		if Connector.login(request.form['username'],request.form['pwd'])==0:
+			return "Login success."
     return "Login failed."
 
 if __name__ == "__main__":
