@@ -76,3 +76,10 @@ class MySQLConnector:
 			"values (%s, %s, %s, %s, %s)")
 		self.cursor.execute(queries,(ID,uname,page,time,IP))
 		self.conn.commit()
+	
+	def ask_history(self, uname):
+		queries = (
+			"SELECT * from history "
+			"where username = %s ")
+		self.cursor.execute(queries, (uname))
+		return self.cursor.fetchall()
