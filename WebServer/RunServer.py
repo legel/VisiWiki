@@ -64,7 +64,7 @@ def login():
 def registration():
     if request.method == 'POST':
 	    if request.form.has_key('username') and request.form.has_key('pwd1') and request.form.has_key('pwd2') and request.form.has_key('email'):
-		result=Connector.register(request.form['username'],request.form['pwd1'],request.form['email'])
+		result=Connector.register(request.form['username'],request.form['pwd1'],request.form['pwd2'],request.form['email'])
 		if result == -2:
 		    return "User already exists."
 		if result == -1:

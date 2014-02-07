@@ -51,7 +51,7 @@ class MySQLConnector:
 			return -2
 
 		queries = (
-			"SELECT * from user "
+			"SELECT pswd from user "
 			"where username = %s")
 		self.cursor.execute(queries, (uname))
 		for _ in self.cursor:
@@ -59,7 +59,7 @@ class MySQLConnector:
 		queries = (
 			"INSERT into user "
 			"(username, pswd, email)"
-			"values (%s, %s,%s)")
+			"values (%s, %s, %s)")
 
 		self.cursor.execute(queries,(uname,H1,email))
 		self.conn.commit()
