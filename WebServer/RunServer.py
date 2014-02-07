@@ -7,7 +7,12 @@ import os
 from flask import request
 from flask import Flask
 from HTMLGetter import *
-app = Flask(__name__)
+from web.DoQuery import *
+import json
+
+ASSETS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), './html')
+
+app = Flask(__name__, template_folder=ASSETS_DIR, static_folder=ASSETS_DIR)
 
 def read_file(filename):
     f=open(filename)
@@ -34,28 +39,22 @@ def show_post(username,post_id):
     
 @app.route('/html/<path:filename>')
 def send_foo(filename):
-    return read_file('html/'+filename)
-    #app.send_static_file(os.getcwd() +'html/index.html')
+    #return read_file('html/'+filename)
+    return app.send_static_file('html/'+filename)
 
-parser = LinkParser()
+queryObj = DoQuery()
 
 @app.route('/query/<topic>')
 def query(topic):
-    list = parser.lookup(topic)
-    print len(list)
-    text = []
-    for l in list:
-        text.append("<a href='/query/%s'>%s %d</a>" %(l.name,l.name,l.count))
-        #text.append(l.name+" "+str(l.count))
-    return '<br>'.join(text)
-    #app.send_static_file(os.getcwd() +'html/index.html')
-
+    text = queryObj.query(topic)
+    print text
+    return json.dumps(text)
+    
 @app.route("/login", methods = ['POST','GET'])
 def login():
     if request.method == 'POST':
-        print request.form
-        if request.form['firstname'] =='tom':
-            return "welcome, %s " % (request.form['firstname'])
+        if request.form.has_key('username') and request.form['username'] =='tom':
+            return "welcome, %s " % (request.form['username'])
     return "Login failed."
 
 if __name__ == "__main__":
