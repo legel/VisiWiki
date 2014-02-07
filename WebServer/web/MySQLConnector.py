@@ -14,6 +14,7 @@ class MySQLConnector:
 			"create table user ("
 			" username varchar(20) NOT NULL,"
 			" pswd varchar(50) NOT NULL,"
+			" email varchar(30) NOT NULL,"
 			" primary key (username)"
 			" ) ENGINE=InnoDB")
 		self.cursor.execute(queries)
@@ -43,7 +44,7 @@ class MySQLConnector:
 				return 0
 		return -2
 	
-	def register(self, uname, pswd1, pswd2):
+	def register(self, uname, pswd1, pswd2, email):
 		H1=hashlib.sha1(pswd1).hexdigest()
 		H2=hashlib.sha1(pswd2).hexdigest()
 		if H1 != H2:
@@ -57,10 +58,10 @@ class MySQLConnector:
 			return -1
 		queries = (
 			"INSERT into user "
-			"(username, pswd)"
-			"values (%s, %s)")
+			"(username, pswd, email)"
+			"values (%s, %s,%s)")
 
-		self.cursor.execute(queries,(uname,H1))
+		self.cursor.execute(queries,(uname,H1,email))
 		self.conn.commit()
 		return 0
 
