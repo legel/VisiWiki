@@ -15,12 +15,20 @@ class DoQuery(object):
     def query(self, word):
         list = self.parser.lookup(word)
         list.sort(key = lambda x : int(x.count), reverse=True)
-        return list
+        
+        topList = []
+        i =0
+        for l in list:
+            topList.append(l)
+            i+=1
+            if(i==1000):
+                break
+        return topList
     
     def queryJson(self,word):
         links = self.query(word)
         size = len(links)
-        groupNum = 10
+        groupNum = 3
         chunkSize = size/groupNum
         if(size ==0 or chunkSize==0):
             return ""
