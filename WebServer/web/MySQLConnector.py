@@ -5,6 +5,8 @@ class MySQLConnector:
 	def __init__(self):
 		self.conn = mysql.connector.connect(host='127.0.0.1', user='', passwd='',database='test')
 		self.cursor = self.conn.cursor()
+		self.cursor.execute('use test')
+		
 	def __del__(self):
 		self.cursor.close()
 		self.conn.close()
@@ -34,9 +36,8 @@ class MySQLConnector:
 	def login(self, uname, pswd):
 		H=hashlib.sha1(pswd).hexdigest()
 		queries = (
-			"SELECT pswd from user "
-			"where username = %s")
-		self.cursor.execute(queries,(uname))
+			"SELECT pswd from user where username = %s")
+		self.cursor.execute(queries,[uname])
 		for stored_pswd in self.cursor:
 			if stored_pswd[0] != H:
 				return -1
@@ -51,10 +52,10 @@ class MySQLConnector:
 			return -2
 
 		queries = (
-			"SELECT pswd from user "
-			"where username = %s")
-		self.cursor.execute(queries, (uname))
+			"SELECT pswd from user where username = %s")
+		self.cursor.execute(queries, [uname])
 		for _ in self.cursor:
+			print _
 			return -1
 		queries = (
 			"INSERT into user "
@@ -76,3 +77,8 @@ class MySQLConnector:
 			"values (%s, %s, %s, %s, %s)")
 		self.cursor.execute(queries,(ID,uname,page,time,IP))
 		self.conn.commit()
+		
+		
+if __name__ == '__main__':
+	obj = MySQLConnector()
+	obj.InitDB()
