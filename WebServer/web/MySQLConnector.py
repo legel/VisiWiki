@@ -77,18 +77,8 @@ class MySQLConnector:
 			"values (%s, %s, %s, %s, %s)")
 		self.cursor.execute(queries,(ID,uname,page,time,IP))
 		self.conn.commit()
-<<<<<<< HEAD
 		
 		
 if __name__ == '__main__':
 	obj = MySQLConnector()
 	obj.InitDB()
-=======
-	
-	def ask_history(self, uname):
-		queries = (
-			"SELECT * from history "
-			"where username = %s ")
-		self.cursor.execute(queries, (uname))
-		return self.cursor.fetchall()
->>>>>>> bd4005e67c6bda949fecdc65d033db2446e0558b
