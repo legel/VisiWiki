@@ -4,8 +4,10 @@ Created on Feb 6, 2014
 @author: homliu
 '''
 from HTMLGetter import *
-from DoQuery import *
 import json
+from web.MySQLConnector import *
+
+mysql = MySQLConnector()
 
 class DoQuery(object):
 
@@ -26,6 +28,11 @@ class DoQuery(object):
         return topList
     
     def queryJson(self,word):
+        #result = mysql.queryWordInDB(word)
+        #print result
+        #if result != None:
+        #    return result;
+        
         links = self.query(word)
         size = len(links)
         groupNum = 3
@@ -60,7 +67,7 @@ class DoQuery(object):
                                        'weight': link.count*100/maxCount  });
         
         topicGroup[groupID]['weight']=groupWeight
-        return json.dumps(topicGroup)
+        return json.dumps(topicGroup) 
         
     
         

@@ -5,6 +5,7 @@ Created on Feb 5, 2014
 '''
 import os
 import json
+import datetime
 from flask import Flask, session, redirect, url_for, escape, request
 from HTMLGetter import *
 from web.DoQuery import *
@@ -64,6 +65,11 @@ def registration():
 @app.route('/query/<topic>')
 def query(topic):
     jsonText = queryObj.queryJson(topic)
+    uname = "unknown"
+    if session.has_key('username'):
+        uname = session['username']
+    Connector.visit( uname, topic, datetime.datetime.now(), request.remote_addr)
+    print jsonText
     return jsonText
  
 

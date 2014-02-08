@@ -15,14 +15,67 @@
 	<link rel="stylesheet" type="text/css" href="./source/jquery.fancybox.css?v=2.1.5" media="screen" />
 
 
-<div class="srch" id="animate_me">
-	<section class="webdesigntuts-workshop">
-		<form action="" method="">		    
-			<input type="search" placeholder="Explore...">		    	
-		</form>
-	    	<button id="search" onclick="loadData()" >Search</button> 
+<div class="wrapper" style="
+position:fixed;
+ left:50%;  
+ top:50%">
+<div class="srch" id="animate_me" style="
+position:relative; 
+  left:-50%;
+  top:-50%
+"
+>
+
+	<section class="webdesigntuts-workshop">	    
+			<input type="search" placeholder="Explore..." style="
+				opacity: .8;
+	background: #EEE;
+	background: -webkit-linear-gradient(#FFF, #DDD);	
+	background: -moz-linear-gradient(#FFF, #DDD);	
+	background: -o-linear-gradient(#FFF, #DDD);	
+	background: -ms-linear-gradient(#FFF, #DDD);	
+	background: linear-gradient(#FFF, #DDD);	
+	border-radius: 5px 0 0 5px;
+	color: #333;
+	display: block;
+	float: left;
+	font-family: 'Cabin', helvetica, arial, sans-serif;
+	font-size: 26px;
+	font-weight: 400;
+	height: 40px;
+	margin: 0;
+	padding: 0 0px;
+	width: 200px;">		    	
+	    	<button id="search" onclick="move();loadData()" style="
+	    	opacity: .8;
+	background: #888;
+	background: -webkit-linear-gradient(#DDD, #CCC);
+	background: -moz-linear-gradient(#DDD, #CCC);
+	background: -o-linear-gradient(#DDD, #CCC);
+	background: -ms-linear-gradient(#DDD, #CCC);
+	background: linear-gradient(#DDD, #CCC);
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	-o-box-sizing: content-box;
+	-ms-box-sizing: content-box;
+	box-sizing: content-box;
+	border: 1px solid #888;
+	border-radius: 0 5px 5px 0;
+	color: #222;
+	display: block;
+	float: left;
+	font-family: 'Cabin', helvetica, arial, sans-serif;
+	font-size: 26px;
+	font-weight: 400;
+	height: 39px;
+	line-height: 40px;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	width: 120px;">Search</button> 
 	</section>
 </div> 
+</div>
 
 
 	<script type="text/javascript">
@@ -226,26 +279,36 @@
 
 		body {
 			margin: 0 auto;
-			background-image:url('galaxy.jpg');
+			background-image:url('background.jpg');
 		}
 	</style>
 </head>
 <body>
 
+	  
 	    <div id="myCanvasContainer">
-      <canvas width="500" height="500" id="myCanvas">
+      <canvas id="myCanvas" width="500" height="500" >
         <p>Anything in here will be replaced on browsers that support the canvas element</p>
       </canvas>
-    </div>
     <div id="tags">
     </div>
-<div>
-
+</div>
 <script>
+
+function move(){
+
+$(".srch").animate({
+      	bottom:'300'
+      }, 'slow')
+move=move2;
+}
+
+function move2(){}
+
 function loadData()
 {
 
-	var jsonText = '[{"articles": [{"url": "en.wikipedia.org/wiki/Netbook", "id": 2, "weight": 100, "name": "Netbook"}, {"url": "en.wikipedia.org/wiki/World_War_II", "id": 3, "weight": 53, "name": "World_War_II"}, {"url": "en.wikipedia.org/wiki/Internet", "id": 4, "weight": 26, "name": "Internet"}, {"url": "en.wikipedia.org/wiki/Alan_Turing", "id": 5, "weight": 18, "name": "Alan_Turing"}], "id": 0, "weight": 197}, {"articles": [{"url": "en.wikipedia.org/wiki/Computer", "id": 6, "weight": 17, "name": "Computer"}, {"url": "en.wikipedia.org/wiki/Washington,_D.C.", "id": 7, "weight": 16, "name": "Washington,_D.C."}, {"url": "en.wikipedia.org/wiki/Linux", "id": 8, "weight": 15, "name": "Linux"}, {"url": "en.wikipedia.org/wiki/Hypertext_Transfer_Protocol", "id": 9, "weight": 15, "name": "Hypertext_Transfer_Protocol"}, {"url": "en.wikipedia.org/wiki/Operating_system", "id": 10, "weight": 15, "name": "Operating_system"}], "id": 1, "weight": 78}, {"articles": [{"url": "en.wikipedia.org/wiki/Microsoft_Windows", "id": 11, "weight": 13, "name": "Microsoft_Windows"}, {"url": "en.wikipedia.org/wiki/Java_(programming_language)", "id": 12, "weight": 12, "name": "Java_(programming_language)"}, {"url": "en.wikipedia.org/wiki/Windows_8", "id": 13, "weight": 12, "name": "Windows_8"}, {"url": "en.wikipedia.org/wiki/HTML", "id": 14, "weight": 11, "name": "HTML"}, {"url": "en.wikipedia.org/wiki/Amsterdam", "id": 15, "weight": 11, "name": "Amsterdam"}], "id": 2, "weight": 59}, {"articles": [{"url": "en.wikipedia.org/wiki/Quantum_computer", "id": 16, "weight": 11, "name": "Quantum_computer"}, {"url": "en.wikipedia.org/wiki/Mobile_phone", "id": 17, "weight": 11, "name": "Mobile_phone"}, {"url": "en.wikipedia.org/wiki/JavaScript", "id": 18, "weight": 11, "name": "JavaScript"}, {"url": "en.wikipedia.org/wiki/Laptop", "id": 19, "weight": 11, "name": "Laptop"}, {"url": "en.wikipedia.org/wiki/PHP", "id": 20, "weight": 11, "name": "PHP"}], "id": 3, "weight": 55}, {"articles": [{"url": "en.wikipedia.org/wiki/C_(programming_language)", "id": 21, "weight": 10, "name": "C_(programming_language)"}, {"url": "en.wikipedia.org/wiki/X86-64", "id": 22, "weight": 10, "name": "X86-64"}, {"url": "en.wikipedia.org/wiki/Computer_network", "id": 23, "weight": 10, "name": "Computer_network"}, {"url": "en.wikipedia.org/wiki/Web_browser", "id": 24, "weight": 10, "name": "Web_browser"}, {"url": "en.wikipedia.org/wiki/Windows_7", "id": 25, "weight": 10, "name": "Windows_7"}], "id": 4, "weight": 50}, {"articles": [{"url": "en.wikipedia.org/wiki/World_Wide_Web", "id": 26, "weight": 10, "name": "World_Wide_Web"}, {"url": "en.wikipedia.org/wiki/Smartphone", "id": 27, "weight": 9, "name": "Smartphone"}, {"url": "en.wikipedia.org/wiki/Python_(programming_language)", "id": 28, "weight": 9, "name": "Python_(programming_language)"}, {"url": "en.wikipedia.org/wiki/XML", "id": 29, "weight": 9, "name": "XML"}, {"url": "en.wikipedia.org/wiki/International_Standard_Book_Number", "id": 30, "weight": 9, "name": "International_Standard_Book_Number"}], "id": 5, "weight": 46}, {"articles": [{"url": "en.wikipedia.org/wiki/Hard_disk_drive", "id": 31, "weight": 9, "name": "Hard_disk_drive"}, {"url": "en.wikipedia.org/wiki/Transistor", "id": 32, "weight": 9, "name": "Transistor"}, {"url": "en.wikipedia.org/wiki/Application_software", "id": 33, "weight": 9, "name": "Application_software"}, {"url": "en.wikipedia.org/wiki/Algorithm", "id": 34, "weight": 9, "name": "Algorithm"}, {"url": "en.wikipedia.org/wiki/Computer_science", "id": 35, "weight": 9, "name": "Computer_science"}], "id": 6, "weight": 45}, {"articles": [{"url": "en.wikipedia.org/wiki/C%2B%2B", "id": 36, "weight": 8, "name": "C%2B%2B"}, {"url": "en.wikipedia.org/wiki/Windows_XP", "id": 37, "weight": 8, "name": "Windows_XP"}, {"url": "en.wikipedia.org/wiki/United_States_Army", "id": 38, "weight": 8, "name": "United_States_Army"}, {"url": "en.wikipedia.org/wiki/Video_game", "id": 39, "weight": 8, "name": "Video_game"}, {"url": "en.wikipedia.org/wiki/Artificial_intelligence", "id": 40, "weight": 7, "name": "Artificial_intelligence"}], "id": 7, "weight": 39}, {"articles": [{"url": "en.wikipedia.org/wiki/ARM_architecture", "id": 41, "weight": 7, "name": "ARM_architecture"}, {"url": "en.wikipedia.org/wiki/File_Transfer_Protocol", "id": 42, "weight": 7, "name": "File_Transfer_Protocol"}, {"url": "en.wikipedia.org/wiki/Random-access_memory", "id": 43, "weight": 7, "name": "Random-access_memory"}, {"url": "en.wikipedia.org/wiki/Ethernet", "id": 44, "weight": 6, "name": "Ethernet"}, {"url": "en.wikipedia.org/wiki/Smart_TV", "id": 45, "weight": 6, "name": "Smart_TV"}], "id": 8, "weight": 33}, {"articles": [{"url": "en.wikipedia.org/wiki/C_Sharp_(programming_language)", "id": 46, "weight": 6, "name": "C_Sharp_(programming_language)"}, {"url": "en.wikipedia.org/wiki/Central_processing_unit", "id": 47, "weight": 6, "name": "Central_processing_unit"}, {"url": "en.wikipedia.org/wiki/Tablet_computer", "id": 48, "weight": 6, "name": "Tablet_computer"}, {"url": "en.wikipedia.org/wiki/Personal_computer", "id": 49, "weight": 6, "name": "Personal_computer"}, {"url": "en.wikipedia.org/wiki/Unix", "id": 50, "weight": 6, "name": "Unix"}], "id": 9, "weight": 30}, {"articles": [{"url": "en.wikipedia.org/wiki/Cryptography", "id": 51, "weight": 6, "name": "Cryptography"}, {"url": "en.wikipedia.org/wiki/Programming_language", "id": 52, "weight": 6, "name": "Programming_language"}], "id": 10, "weight": 12}]';
+	var jsonText = '[{"articles": [{"url": "en.wikipedia.org/wiki/Netbook", "id": 2, "weight": 100, "name": "Netbook"}, {"url": "en.wikipedia.org/wiki/World_War_II", "id": 3, "weight": 53, "name": "World_War_II"}, {"url": "en.wikipedia.org/wiki/Internet", "id": 4, "weight": 26, "name": "Internet"}, {"url": "en.wikipedia.org/wiki/Alan_Turing", "id": 5, "weight": 18, "name": "Alan_Turing"}], "id": 0, "weight": 197}, {"articles": [{"url": "en.wikipedia.org/wiki/Computer", "id": 6, "weight": 17, "name": "Computer"}, {"url": "en.wikipedia.org/wiki/Washington,_D.C.", "id": 7, "weight": 16, "name": "Washington,_D.C."}, {"url": "en.wikipedia.org/wiki/Linux", "id": 8, "weight": 15, "name": "Linux"}, {"url": "en.wikipedia.org/wiki/Hypertext_Transfer_Protocol", "id": 9, "weight": 15, "name": "Hypertext_Transfer_Protocol"}, {"url": "en.wikipedia.org/wiki/Operating_system", "id": 10, "weight": 15, "name": "Operating_system"}], "id": 1, "weight": 78}, {"articles": [{"url": "en.wikipedia.org/wiki/Microsoft_Windows", "id": 11, "weight": 13, "name": "Microsoft_Windows"}, {"url": "en.wikipedia.org/wiki/Java_(programming_language)", "id": 12, "weight": 12, "name": "Java_(programming_language)"}, {"url": "en.wikipedia.org/wiki/Windows_8", "id": 13, "weight": 12, "name": "Windows_8"}, {"url": "en.wikipedia.org/wiki/HTML", "id": 14, "weight": 11, "name": "HTML"}, {"url": "en.wikipedia.org/wiki/Amsterdam", "id": 15, "weight": 11, "name": "Amsterdam"}], "id": 2, "weight": 59}, {"articles": [{"url": "en.wikipedia.org/wiki/Quantum_computer", "id": 16, "weight": 11, "name": "Quantum_computer"}, {"url": "en.wikipedia.org/wiki/Mobile_phone", "id": 17, "weight": 11, "name": "Mobile_phone"}, {"url": "en.wikipedia.org/wiki/JavaScript", "id": 18, "weight": 11, "name": "JavaScript"}, {"url": "en.wikipedia.org/wiki/Laptop", "id": 19, "weight": 11, "name": "Laptop"}, {"url": "en.wikipedia.org/wiki/PHP", "id": 20, "weight": 11, "name": "PHP"}], "id": 3, "weight": 55}, {"articles": [{"url": "en.wikipedia.org/wiki/C_(programming_language)", "id": 21, "weight": 10, "name": "C_(programming_language)"}, {"url": "en.wikipedia.org/wiki/X86-64", "id": 22, "weight": 10, "name": "X86-64"}, {"url": "en.wikipedia.org/wiki/Computer_network", "id": 23, "weight": 10, "name": "Computer_network"}, {"url": "en.wikipedia.org/wiki/Web_browser", "id": 24, "weight": 10, "name": "Web_browser"}, {"url": "en.wikipedia.org/wiki/Windows_7", "id": 25, "weight": 10, "name": "Windows_7"}], "id": 4, "weight": 50}, {"articles": [{"url": "en.wikipedia.org/wiki/ World_Wide_Web", "id": 26, "weight": 10, "name": "World_Wide_Web"}, {"url": "en.wikipedia.org/wiki/Smartphone", "id": 27, "weight": 9, "name": "Smartphone"}, {"url": "en.wikipedia.org/wiki/Python_(programming_language)", "id": 28, "weight": 9, "name": "Python_(programming_language)"}, {"url": "en.wikipedia.org/wiki/XML", "id": 29, "weight": 9, "name": "XML"}, {"url": "en.wikipedia.org/wiki/International_Standard_Book_Number", "id": 30, "weight": 9, "name": "International_Standard_Book_Number"}], "id": 5, "weight": 46}, {"articles": [{"url": "en.wikipedia.org/wiki/Hard_disk_drive", "id": 31, "weight": 9, "name": "Hard_disk_drive"}, {"url": "en.wikipedia.org/wiki/Transistor", "id": 32, "weight": 9, "name": "Transistor"}, {"url": "en.wikipedia.org/wiki/Application_software", "id": 33, "weight": 9, "name": "Application_software"}, {"url": "en.wikipedia.org/wiki/Algorithm", "id": 34, "weight": 9, "name": "Algorithm"}, {"url": "en.wikipedia.org/wiki/Computer_science", "id": 35, "weight": 9, "name": "Computer_science"}], "id": 6, "weight": 45}, {"articles": [{"url": "en.wikipedia.org/wiki/C%2B%2B", "id": 36, "weight": 8, "name": "C%2B%2B"}, {"url": "en.wikipedia.org/wiki/Windows_XP", "id": 37, "weight": 8, "name": "Windows_XP"}, {"url": "en.wikipedia.org/wiki/United_States_Army", "id": 38, "weight": 8, "name": "United_States_Army"}, {"url": "en.wikipedia.org/wiki/Video_game", "id": 39, "weight": 8, "name": "Video_game"}, {"url": "en.wikipedia.org/wiki/Artificial_intelligence", "id": 40, "weight": 7, "name": "Artificial_intelligence"}], "id": 7, "weight": 39}, {"articles": [{"url": "en.wikipedia.org/wiki/ARM_architecture", "id": 41, "weight": 7, "name": "ARM_architecture"}, {"url": "en.wikipedia.org/wiki/File_Transfer_Protocol", "id": 42, "weight": 7, "name": "File_Transfer_Protocol"}, {"url": "en.wikipedia.org/wiki/Random-access_memory", "id": 43, "weight": 7, "name": "Random-access_memory"}, {"url": "en.wikipedia.org/wiki/Ethernet", "id": 44, "weight": 6, "name": "Ethernet"}, {"url": "en.wikipedia.org/wiki/Smart_TV", "id": 45, "weight": 6, "name": "Smart_TV"}], "id": 8, "weight": 33}, {"articles": [{"url": "en.wikipedia.org/wiki/C_Sharp_(programming_language)", "id": 46, "weight": 6, "name": "C_Sharp_(programming_language)"}, {"url": "en.wikipedia.org/wiki/Central_processing_unit", "id": 47, "weight": 6, "name": "Central_processing_unit"}, {"url": "en.wikipedia.org/wiki/Tablet_computer", "id": 48, "weight": 6, "name": "Tablet_computer"}, {"url": "en.wikipedia.org/wiki/Personal_computer", "id": 49, "weight": 6, "name": "Personal_computer"}, {"url": "en.wikipedia.org/wiki/Unix", "id": 50, "weight": 6, "name": "Unix"}], "id": 9, "weight": 30}, {"articles": [{"url": "en.wikipedia.org/wiki/Cryptography", "id": 51, "weight": 6, "name": "Cryptography"}, {"url": "en.wikipedia.org/wiki/Programming_language", "id": 52, "weight": 6, "name": "Programming_language"}], "id": 10, "weight": 12}]';
 	var obj = jQuery.parseJSON(jsonText);
 
 	var idx = 0;
@@ -265,7 +328,7 @@ function loadData()
 	//alert(obj[0].articles[0].url);
 }
 </script>
-</div>
+
 
 
 	
