@@ -1,0 +1,472 @@
+<html>
+	<head>
+		<title>VisiWiki Hack from DevFest 2014</title>
+		<style>canvas { width: 100%; height: 100% }</style>
+	</head>
+	<body style="overflow-y:auto; position:fixed">
+        <div id='log'/>
+        <script src="/examples/fonts/helvetiker_regular.typeface.js"></script>
+	<script src="/build/three.min.js"></script>
+	<script>
+            var topics =new Array(  "belfort,lamborghini,morello,delphine,monaghan",
+                                    "avn,porn,pornographic,pornography,xbiz",
+                                    "jpg,ryan,nbc,charlie,screenplay",
+                                    "kunis,breslin,ragnar,dern,cuarÃ³",
+                                    "turtles,lebowski,xxx,zedd,haze",
+                                    "potter,voldemort,dumbledore,hogwarts,rowling",
+                                    "zodiac,astrology,kutcher,gyllenhaal,ejaculate",
+                                    "ikea,blackwater,buren,perri,baez,magna",
+                                    "nhl,leafs,cunnilingus,pertwee,hawn,maple",
+                                    "bowl,yards,nfl,quarterback,touchdowns",
+                                    "zombie,sudan,inca,zappa,matlab,chongqing",
+                                    "bitcoin,conductivity,convection,aiken,jellyfish",
+                                    "naruto,sheldon,penny,savannah,leonard",
+                                    "tia,gollum,cartel,townshend,serkis,dano",
+                                    "symptoms,patients,disorder,syndrome,brain",
+                                    "iphone,ipad,ipod,apple,ronan,anno",
+                                    "soviet,islands,climate,chemical,bc",
+                                    "ghz,woodbury,sodom,curie,walkers,tisdale",
+                                    "cannabis,ronaldo,thc,stargate,barcelona",
+                                    "mhz,engine,zeus,intel,gt,ibm",
+                                    "boeing,valve,airlines,aircraft,airbus",
+                                    "penthouse,shogun,indy,roxbury,carthage",
+                                    "duke,tax,emperor,constitution,victoria",
+                                    "scientology,mandela,qi,gundam,vp,tbd",
+                                    "software,server,windows,user,users",
+                                    "gleeson,lorde,kinney,mls,streptococcal",
+                                    "blizzard,warcraft,foreskin,deschanel,diablo",
+                                    "cup,fifa,euro,chelsea,arsenal,fa,stadium",
+                                    "anime,manga,nintendo,playstation,wii",
+                                    "percy,grimes,wonders,curry,merrick",
+                                    "acid,infection,protein,cells,sodium",
+                                    "jane,vampire,spielberg,saturn,bafta",
+                                    "malkovich,satan,uterus,gervais,squid",
+                                    "jaden,foxes,lithium,palmer,hobbes,zoya",
+                                    "riddick,astin,clemson,kaye,tamblyn,bowden",
+                                    "duck,chef,robertson,cake,olive,helena",
+                                    "goals,scored,uefa,premier,glee,apps",
+                                    "hobbit,tolkien,sauron,rings,gandalf",
+                                    "mafia,gambino,gotti,meme,coppola,simba",
+                                    "bjp,tata,janata,vajpayee,unilever,sumerian",
+                                    "seaworld,orca,pentagram,ophthalmology,polio",
+                                    "tomlin,warfarin,inr,pomegranate,vermeer,cudi",
+                                    "alphabet,vowel,cyrillic,phoenician,px,terrier",
+                                    "tsar,sooners,lenin,bale,shelley,trotsky,challenger",
+                                    "wahlberg,scope,row,armstrong,hdmi,mythbusters",
+                                    "lerman,perks,mukerji,wallflower,merkel,powerpoint",
+                                    "massage,bourne,dildo,tenerife,haim,cooke",
+                                    "macfarlane,victorious,osment,stewie,gluten",
+                                    "terminator,farmiga,nwa,wbc,marianne,raff",
+                                    "wwe,wrestling,championship,wwf,raw,wrestlemania",
+                                    "glycol,ovulation,follicle,farrow,lymphatic",
+                                    "kapoor,bachchan,bhatt,karan,arjun,vowel",
+                                    "qatar,mcqueen,candace,dempsey,maleficent",
+                                    "potter,spector,radcliffe,grint,deathly",
+                                    "nba,aircraft,championship,coach,telugu",
+                                    "px,padding,ufc,tko,bgcolor,heavyweight",
+                                    "albums,billboard,vocals,guitar,singles",
+                                    "darts,ipv,hansel,gretel,brie,exo",
+                                    "jonas,kombat,whitehall,deloitte",
+                                    "schindler,narnia,dillinger,eclampsia",
+                                    "platinum,swi,gucci,aus,cyst,bpi,aut",
+                                    "est,dsm,ht,tesla,dopamine,schizophrenia",
+                                    "mcgraw,copperfield,masterson,giraud,phineas",
+                                    "haggis,khrushchev,lol,jaguar,defoe,barnabas",
+                                    "fruit,ferrari,cheese,germanic,milk,soy,speakers",
+                                    "hz,hotspot,gaulle,dawes,sarcoidosis,sc,opal",
+                                    "harmon,dune,azaria,cleary,benatar,nitrite,saas",
+                                    "braff,elysium,porsche,scorpions,aquarius,zandt",
+                                    "disney,emmy,broadway,miniseries,primetime,spider",
+                                    "bilbo,yoon,jang,smaug,suk,dwarves",
+                                    "cyrus,htc,samsung,newell,miley,sanders,meth",
+                                    "vector,newton,rollins,nxt,sartre,equation", 
+                                    "rebounds,assists,stump,cromwell,sims,pacers",
+                                    "vagina,orgasm,vaginal,anal,ejaculation,intercourse",
+                                    "yellowstone,mara,fernandez,hatcher,pronouns",
+                                    "sherlock,holmes,watson,gosling,mycroft",
+                                    "ncis,airdate,samurai,olsen,shogunate",
+                                    "underwood,kabir,vidya,jai,lopes",
+                                    "khan,filmfare,tamil,singh,hindi",
+                                    "hdi,crockett,vortex,glutathione,pca,mem",
+                                    "colspan,dexter,hangover,align,schreiber",
+                                    "korean,kim,korea,kbs,jung",
+                                    "serenity,bundesliga,dortmund,whisky,bayern",
+                                    "galactica,battlestar,cosby,maybach,rangers",
+                                    "virus,rna,influenza,adrenal,viruses",
+                                    "maguire,raimi,tcp,shuttle,nursing,udp",
+                                    "kardashian,jenner,kardashians,kris,irvine",
+                                    "hunger,muhammad,islam,islamic,muslim",
+                                    "dante,jong,apollo,lunar,libya,libyan",
+                                    "jesus,christ,pope,orthodox,holy,testament",
+                                    "doubles,wimbledon,tournament,wta,slam",
+                                    "anakin,jedi,zimmerman,pdc,hebrew",
+                                    "universe,von,object,objects,batman",
+                                    "downton,homo,menzel,lohan,uranus",
+                                    "hpv,bpm,warts,nr,constabulary",
+                                    "stiller,taliban,yg,afl,benzodiazepines",
+                                    "breed,dogs,breeds,kennel,tail",
+                                    "shaw,jovi,cbi,mormons,bon,dostoyevsk",
+                                    "devices,frequency,hydrogen,voltage,density",
+                                   "goku,cricket,innings,fleetwood,nicks");
+            
+            var camera, scene, clicks, renderer;
+			var material, mesh;
+            var ball1, mat1, mesh1, ball2, mat2, mesh2, ball3, mat3, mesh3, ball4, mat4, mesh4 ;
+            var len=0.0;
+            var total = 5;
+            var myBlobs = new Array(total*2); // 0 for x, 1 for y, 2 for z, 3 for r
+            
+            for( var i=0; i <total*2; i++){
+                myBlobs[i] = new Array(4);
+            }
+            
+            var mesh = new Array(total*2);
+            var ball = new Array(total*2);
+            var texts = new Array(total);
+            var contexts = new Array(total);
+            var TextGeo = new Array(total);
+        
+            
+			window.addEventListener("click", onClick, false);
+            window.addEventListener("mousemove",onDrag, false);
+            
+            var pageX = -1;
+            var pageY = -1;
+            var angleCenter = 0;
+            
+            function onDrag(e)
+            {
+                if(pageX == -1|| pageY ==-1)
+                {
+                    pageX = e.pageX;
+                    pageY = e.pageY;
+                    return;
+                }
+                
+                var deltaX= e.pageX - pageX;
+                var deltaY= e.pageY - pageY;
+                
+                pageX = e.pageX;
+                pageY = e.pageY;
+                
+            
+                deltaX/=4000.0;
+                deltaY/=4000.0;
+                
+                for(var i =0 ; i <total;i++){
+                    var z1=myBlobs[i][2]*Math.cos(deltaX)-myBlobs[i][0]*Math.sin(deltaX);
+                    var x1=myBlobs[i][2]*Math.sin(deltaX)+myBlobs[i][0]*Math.cos(deltaX);
+                    var y1=myBlobs[i][1];
+                    var y2=y1*Math.cos(deltaY)-z1*Math.sin(deltaY);
+                    var z2=y1*Math.sin(deltaY)+z1*Math.cos(deltaY);
+                    var x2=x1;
+                    myBlobs[i][0]=x2;
+                    myBlobs[i][1]=y2;
+                    myBlobs[i][2]=z2;
+                    
+                    TextGeo[i].position.set(-myBlobs[i][0]/myBlobs[i][2]*20+2,-myBlobs[i][1]/myBlobs[i][2]*20-2,-20);
+                }
+                
+                
+                
+                for(var i=0;i<total;i++){
+                    /*ball[i] = new THREE.SphereGeometry(myBlobs[i][3], 25, 25, 0, 2*Math.PI, 0, Math.PI);
+                    mesh[i] = new THREE.Mesh(ball[i], mat1);*/
+                    mesh[i].position.set(myBlobs[i][0],myBlobs[i][1],myBlobs[i][2]);
+                    //texts[i].style.top=myBlobs[i][0]/myBlobs[i][2]*len;
+                    //texts[i].style.left=myBlobs[i][1]/myBlobs[i][2]*len;
+                    //scene.add(mesh[i]);
+                }
+                
+                renderer.render(scene, camera);
+                
+            }
+            
+            var fram=10;
+            var clicked;
+            var counter;
+            var x_ani,y_ani,z_ani;
+            
+            
+            
+                        
+            function onClick(e)
+            {
+                var x_c=e.clientX-window.innerWidth/2.0;
+                var y_c=-e.clientY+window.innerHeight/2.0;
+                var z_c=-len;
+                clicked=-1;
+                for (var i=0;i<myBlobs.length;i++){
+                    var mul=x_c*myBlobs[i][0]+y_c*myBlobs[i][1]+z_c*myBlobs[i][2];
+                    var tmp_len=mul/Math.sqrt(x_c*x_c+y_c*y_c+z_c*z_c);
+                    var dis=Math.sqrt(myBlobs[i][0]*myBlobs[i][0]+myBlobs[i][1]*myBlobs[i][1]+myBlobs[i][2]*myBlobs[i][2]-tmp_len*tmp_len);
+                    
+                
+                    if(dis<myBlobs[i][3]){
+                        clicked=i;
+                        
+                        break;
+                    }
+                    
+                }
+                if(clicked==-1)return;
+                if(clicked==0){
+                    //why are you clicking on this?
+                }else{
+                    var x_d = myBlobs[clicked][0]-myBlobs[0][0];
+                    var y_d = myBlobs[clicked][1]-myBlobs[0][1];
+                    var z_d = myBlobs[clicked][2]-myBlobs[0][2];
+                    for( var i=1; i < total; i++){
+                        var randx = Math.random();
+                        var randy = Math.random();
+                        myBlobs[i+total-1][0] = (randx>0.5?1:-1)*200*(1.4+randx)+x_d;//Math.round(Math.random()*300);
+                        //document.getElementById("log").innerHTML += "myBlobs[ "+i+" ][0]="+Math.round(Math.random()*100)+"<br>";
+                        myBlobs[i+total-1][1] = (randy>0.5?1:-1)*140*(1.4+randy)+y_d;//Math.round(Math.random()*300);
+                        //document.getElementById("log").innerHTML += "myBlobs[ "+i+" ][0]="+Math.round(Math.random()*100)+"<br>";
+                        myBlobs[i+total-1][2] = -300*(1.5+Math.random())+z_d;
+                        myBlobs[i+total-1][3] = 50;
+                        ball[i+total-1] = new THREE.SphereGeometry(myBlobs[i+total-1][3], 25, 25, 0, 2*Math.PI, 0, Math.PI);
+                    }
+                    for(var i=1;i<total;i++){
+                        mesh[i+total-1].position.set(myBlobs[i+total-1][0],myBlobs[i+total-1][1],myBlobs[i+total-1][2]);   
+                    }
+                    x_ani = x_d*1.0/fram;
+                    y_ani = y_d*1.0/fram;
+                    z_ani = z_d*1.0/fram;
+                    counter=0;
+                    Animate();
+                }
+            }
+            
+            function Animate()
+            {
+                if(counter>=fram){
+                    texts[0]=texts[clicked];
+                    for(var i=1;i<total;i++){
+                        texts[i]=topics[Math.round(Math.random()*99)];
+                    }
+                    myBlobs[0][0]=myBlobs[clicked][0];
+                    myBlobs[0][1]=myBlobs[clicked][1];
+                    myBlobs[0][2]=myBlobs[clicked][2];
+                    for(var i=1;i<total;i++){
+                        myBlobs[i][0]=myBlobs[i+total-1][0];
+                        myBlobs[i][1]=myBlobs[i+total-1][1];
+                        myBlobs[i][2]=myBlobs[i+total-1][2];
+                        myBlobs[i+total-1][0]=0;
+                        myBlobs[i+total-1][1]=0;
+                        myBlobs[i+total-1][2]=200;
+                    }
+                    for(var i=0;i<2*total-1;i++){
+                        mesh[i].position.set(myBlobs[i][0],myBlobs[i][1],myBlobs[i][2]);
+                    }
+                    for(var i=0;i<total;i++){
+                        var canvas1 = document.createElement('canvas');
+                        
+                        contexts[i] = canvas1.getContext('2d');
+                        contexts[i].font = "Bold 20px Arial";
+                        contexts[i].fillStyle = "rgba(255,0,0,0.95)";
+                        contexts[i].fillText(texts[i], 10, 40);
+                        
+                        // canvas contents will be used for a texture
+                        var texture1 = new THREE.Texture(canvas1); 
+                        texture1.needsUpdate = true;
+                          
+                        var material1 = new THREE.MeshBasicMaterial( {map: texture1, side:THREE.DoubleSide } );
+                        material1.transparent = true;
+                    
+                        TextGeo[i] = new THREE.Mesh(
+                            new THREE.PlaneGeometry(10, 5),
+                            material1
+                          );
+                        TextGeo[i].rotation.x=0;
+                        TextGeo[i].rotation.y=0;
+                        TextGeo[i].rotation.z=0;
+                        TextGeo[i].position.set(-myBlobs[i][0]/myBlobs[i][2]*20+2,-myBlobs[i][1]/myBlobs[i][2]*20-2,-20);
+                        scene.add( TextGeo[i] );
+                    }
+                    renderer.render(scene, camera);
+                    return;
+                }
+                requestAnimationFrame(Animate);
+                renderer.render(scene, camera);
+                update();
+            }
+
+
+            function update()
+            {
+                counter++;
+                for(var i=0;i<total*2-1;i++){
+                    myBlobs[i][0]-=x_ani;
+                    myBlobs[i][1]-=y_ani;
+                    myBlobs[i][2]-=z_ani;
+                    mesh[i].position.set(myBlobs[i][0],myBlobs[i][1],myBlobs[i][2]);
+                }
+                for (var i=0;i<total;i++){
+                    TextGeo[i].position.set(1000,1000,-20);
+                    
+                }
+            }
+            
+			var init = function () {
+			    renderer = new THREE.CanvasRenderer();
+			    renderer.setSize(window.innerWidth, window.innerHeight);
+			    document.body.appendChild(renderer.domElement);
+                
+                var alpha = 80.0;
+                camera = new THREE.PerspectiveCamera(alpha, window.innerWidth/window.innerHeight, 1, 100000);
+                camera.position.z = 0;
+                camera.position.x = 0;
+                camera.position.y = 0;
+                var Init_camera_angle = new THREE.Vector3(0,0,-1);
+                camera.lookAt(Init_camera_angle);
+                
+                len=(window.innerHeight/2)/(Math.tan(alpha/360*Math.PI));
+                
+                scene = new THREE.Scene();
+                //var ball = new THREE.SphereGeometry(50, 25, 25, 0, 2*Math.PI, 0, Math.PI);
+                
+                var randx = Math.random();
+                var randy = Math.random();
+                myBlobs[0][0] = 50*randx-25;//Math.round(Math.random()*300);
+                //document.getElementById("log").innerHTML += "myBlobs[ "+i+" ][0]="+Math.round(Math.random()*100)+"<br>";
+                myBlobs[0][1] = 30*randy-15;//Math.round(Math.random()*300);
+                //document.getElementById("log").innerHTML += "myBlobs[ "+i+" ][0]="+Math.round(Math.random()*100)+"<br>";
+                myBlobs[0][2] = -100;
+                myBlobs[0][3] = 50;
+                ball[0] = new THREE.SphereGeometry(myBlobs[0][3], 25, 25, 0, 2*Math.PI, 0, Math.PI);
+                
+                
+                
+                for( var i=1; i < total; i++){
+                    var randx = Math.random();
+                    var randy = Math.random();
+                    myBlobs[i][0] = (randx>0.5?1:-1)*200*(1.4+randx);//Math.round(Math.random()*300);
+                    //document.getElementById("log").innerHTML += "myBlobs[ "+i+" ][0]="+Math.round(Math.random()*100)+"<br>";
+                    myBlobs[i][1] = (randy>0.5?1:-1)*140*(1.4+randy);//Math.round(Math.random()*300);
+                    //document.getElementById("log").innerHTML += "myBlobs[ "+i+" ][0]="+Math.round(Math.random()*100)+"<br>";
+                    myBlobs[i][2] = -300*(1.5+Math.random());
+                    myBlobs[i][3] = 50;
+                    ball[i] = new THREE.SphereGeometry(myBlobs[i][3], 25, 25, 0, 2*Math.PI, 0, Math.PI);
+                }
+                
+                
+                for( var i=1; i < total; i++){
+                    myBlobs[i+total-1][0] = 0;//Math.round(Math.random()*300);
+                    //document.getElementById("log").innerHTML += "myBlobs[ "+i+" ][0]="+Math.round(Math.random()*100)+"<br>";
+                    myBlobs[i+total-1][1] = 0;//Math.round(Math.random()*300);
+                    //document.getElementById("log").innerHTML += "myBlobs[ "+i+" ][0]="+Math.round(Math.random()*100)+"<br>";
+                    myBlobs[i+total-1][2] = 200;
+                    myBlobs[i+total-1][3] = 50;
+                    ball[i+total-1] = new THREE.SphereGeometry(myBlobs[i+total-1][3], 25, 25, 0, 2*Math.PI, 0, Math.PI);
+                }
+                
+                
+                /**ball1 = new THREE.SphereGeometry(100, 25, 25, 0, 2*Math.PI, 0, Math.PI);
+                ball2 = new THREE.SphereGeometry(100, 25, 25, 0, 2*Math.PI, 0, Math.PI);
+                ball3 = new THREE.SphereGeometry(100, 25, 25, 0, 2*Math.PI, 0, Math.PI);
+                ball4 = new THREE.SphereGeometry(100, 25, 25, 0, 2*Math.PI, 0, Math.PI);**/
+                
+                mat1 = new THREE.MeshBasicMaterial({
+                    color: 0xcec8ef,
+                    wireframe: true,
+                    wireframeLinewidth: 2
+                });
+                
+                mat2 = new THREE.MeshBasicMaterial({
+                    color: 0xc9a0dc,
+                    wireframe: true,
+                    wireframeLinewidth: 2
+                });
+                
+                mat3 = new THREE.MeshBasicMaterial({
+                    color: 0xfbaed2,
+                    wireframe: true,
+                    wireframeLinewidth: 2
+                });
+                
+                mat4 = new THREE.MeshBasicMaterial({
+                    color: 0xdda0dd,
+                    wireframe: true,
+                    wireframeLinewidth: 2
+                });
+                
+                
+                
+                for(var i=0;i<total*2-1;i++){
+                    mesh[i]=new THREE.Mesh(ball[i], mat1);
+                    mesh[i].position.set(myBlobs[i][0],myBlobs[i][1],myBlobs[i][2]);
+                    
+                    scene.add(mesh[i]);
+                }
+                
+                // create a canvas element
+                for(var i=0;i<total;i++){
+                    texts[i]=topics[Math.round(Math.random()*99)];
+                    var canvas1 = document.createElement('canvas');
+                    
+                    contexts[i] = canvas1.getContext('2d');
+                    contexts[i].font = "Bold 20px Arial";
+                    contexts[i].fillStyle = "rgba(255,0,0,0.95)";
+                    contexts[i].fillText(texts[i], 10, 40);
+                    
+                    // canvas contents will be used for a texture
+                    var texture1 = new THREE.Texture(canvas1); 
+                    texture1.needsUpdate = true;
+                      
+                    var material1 = new THREE.MeshBasicMaterial( {map: texture1, side:THREE.DoubleSide } );
+                    material1.transparent = true;
+                
+                    TextGeo[i] = new THREE.Mesh(
+                        new THREE.PlaneGeometry(10, 5),
+                        material1
+                      );
+                    TextGeo[i].rotation.x=0;
+                    TextGeo[i].rotation.y=0;
+                    TextGeo[i].rotation.z=0;
+                    TextGeo[i].position.set(-myBlobs[i][0]/myBlobs[i][2]*20+2,-myBlobs[i][1]/myBlobs[i][2]*20-2,-20);
+                    scene.add( TextGeo[i] );
+                }
+                
+                /**mesh2 = new THREE.Mesh(ball2, mat2);
+                mesh3 = new THREE.Mesh(ball3, mat3);
+                mesh4 = new THREE.Mesh(ball4, mat4);
+                mesh5 = new THREE.Mesh(ball1, mat1);
+                mesh6 = new THREE.Mesh(ball2, mat2);
+                mesh7 = new THREE.Mesh(ball3, mat3);
+                mesh8 = new THREE.Mesh(ball4, mat4);**/
+                
+                
+                /**mesh5.position.set(-200,0,-200);
+                mesh6.position.set(-200,0,200);
+                mesh7.position.set(-200, 0, 0);
+                mesh8.position.set(200, 0, -200);**/
+                
+                /**scene.add(mesh5);
+                scene.add(mesh6);
+                scene.add(mesh7);
+                scene.add(mesh8);**/
+            }
+
+			var animate = function () {
+
+			    requestAnimationFrame(animate);
+                mesh1.rotation.x = Date.now() * 0.05;
+			    mesh1.rotation.y = Date.now() * 0.01;
+                mesh2.rotation.x = Date.now() * 0.05;
+                mesh2.rotation.y = Date.now() * 0.01;
+                mesh3.rotation.x = Date.now() * 0.05;
+                mesh3.rotation.y = Date.now() * 0.01;
+                mesh4.rotation.x = Date.now() * 0.05;
+                mesh4.rotation.y = Date.now() * 0.01;
+                
+                renderer.render(scene, camera);
+            }
+
+			init();
+			//animate();
+                renderer.render(scene, camera);
+            
+		</script>
+	</body>
+</html>
