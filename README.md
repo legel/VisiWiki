@@ -19,3 +19,5 @@ Columbia University DevFest 2014: Andreessen Horowitz Most Technically Challengi
 We mapped Wikipedia articles to an interactive 3D space through dimensionality reduction. Articles were clustered into sets of topics automatically via Latent Dirichlet Allocation (LDA). Our week-long project led to a 3D Three.js JavaScript experience through which a user can intuitively explore knowledge in a 3D environment.
 
 As part of our award, we received cash, a deck of A16Z playing cards, and portable JAMBOX speaker.
+
+[Lance Legel](https://www.linkedin.com/in/legel) was team leader.
